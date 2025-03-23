@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cab Service - Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        header,
+        footer {
+            background: #28a745;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f4f4f4;
+            box-shadow: 0 0 10px #ccc;
+        }
+
+        label,
+        input {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            background: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+        }
+
+        .container {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Login</h1>
+    </header>
+
+    <div class="container">
+        <form action="/login" method="POST">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit" class="btn">Login</button>
+        </form>
+
+        <p><a href="/">Back to Home</a></p>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Cab Service. All Rights Reserved.</p>
+    </footer>
+
+</body>
+
+</html>
