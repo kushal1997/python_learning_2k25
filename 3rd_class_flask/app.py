@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 arr =[]
 
-data = [{'name': 'kushal','age':27},{'name':'rama','age':59}]
+data = [{'name': 'kushal','age':26},{'name':'rama','age':59}]
 
 @app.route('/')
 def hello_world():
@@ -35,6 +35,19 @@ def create_user():
         'data':data
     })
 
+# put method to update
+@app.route('/users/<name>',methods = ['PUT'])
+def update_user(name):
+    get_data = request.get_json()
+    for record in data:
+        if record["name"] == name:
+            record["age"] = get_data["age"]
+    
+    return jsonify({
+        "messgae" : "details updated successfully",
+        "data" : data
+    })
+            
 
 if __name__ == '__main__':
     app.run(debug=True)
