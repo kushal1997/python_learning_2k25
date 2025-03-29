@@ -1,84 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cab Service - Login</title>
+    <title>Login Page</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             margin: 0;
-            padding: 20px;
+            background-color: #f4f4f4;
         }
-
-        header,
-        footer {
-            background: #28a745;
-            color: #fff;
+        .login-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        .login-container h2 {
             text-align: center;
-            padding: 20px;
+            margin-bottom: 20px;
         }
-
-        form {
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 20px;
-            background: #f4f4f4;
-            box-shadow: 0 0 10px #ccc;
+        .input-group {
+            margin-bottom: 15px;
         }
-
-        label,
-        input {
+        .input-group label {
             display: block;
-            width: 100%;
-            margin-bottom: 10px;
+            font-size: 14px;
+            margin-bottom: 5px;
         }
-
+        .input-group input {
+            width: 100%;
+            padding: 8px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
         .btn {
-            background: #007bff;
-            color: #fff;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
             width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
         }
-
         .btn:hover {
-            background: #0056b3;
+            background-color: #45a049;
         }
-
-        .container {
+        .link {
             text-align: center;
+            margin-top: 10px;
+        }
+        .link a {
+            color: #4CAF50;
+            text-decoration: none;
         }
     </style>
 </head>
-
 <body>
 
-    <header>
-        <h1>Login</h1>
-    </header>
-
-    <div class="container">
-        <form action="/login" method="POST">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-
+    <div class="login-container">
+        <h2>Login</h2>
+        <form action="/submit-login" method="POST">
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
             <button type="submit" class="btn">Login</button>
         </form>
-
-        <p><a href="/">Back to Home</a></p>
+        <div class="link">
+            <p>Forgot your password? <a href="#">Reset it</a></p>
+        </div>
     </div>
 
-    <footer>
-        <p>&copy; 2025 Cab Service. All Rights Reserved.</p>
-    </footer>
-
 </body>
-
 </html>

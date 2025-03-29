@@ -1,10 +1,12 @@
-from flask import Flask,jsonify,request
+from flask import Flask,jsonify,request, render_template
 
 app = Flask(__name__)
 
 arr =[]
 
 data = [{'name': 'kushal','age':26},{'name':'rama','age':59}]
+
+form_data =[]
 
 @app.route('/')
 def hello_world():
@@ -60,6 +62,11 @@ def delete_user(name):
         "message" : "data deleted succesfully",
         "data" : data
     })
+
+# rending an HTML file
+@app.route('/login')
+def login_page():
+    return render_template("login.html")
 
 
 if __name__ == '__main__':
