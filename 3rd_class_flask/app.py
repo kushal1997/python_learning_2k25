@@ -1,8 +1,11 @@
-from flask import Flask
+from flask import Flask,jsonify,request
 
 app = Flask(__name__)
 
 arr =[]
+
+data = [{'name': 'kushal','age':27},{'name':'rama','age':59}]
+
 @app.route('/')
 def hello_world():
     return 'Hello World'
@@ -13,6 +16,24 @@ def name(username):
     arr.append(username)
     return username + " added successfully"
 
+
+# get method
+@app.route('/users', methods =["GET"])
+def users():
+    return jsonify(data)
+
+
+# post method
+@app.route('/users',methods =["POST"])
+def create_user():
+    new_user = request.get_json()
+    data.append(new_user)
+    print(data)
+
+    return jsonify({
+        'message':'user is added',
+        'data':data
+    })
 
 
 if __name__ == '__main__':
