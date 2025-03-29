@@ -49,5 +49,18 @@ def update_user(name):
     })
             
 
+# delete method
+@app.route('/users/<name>',methods=["DELETE"])
+def delete_user(name):
+    for record in data:
+        if record["name"] == name:
+            data.remove(record)
+    
+    return jsonify({
+        "message" : "data deleted succesfully",
+        "data" : data
+    })
+
+
 if __name__ == '__main__':
     app.run(debug=True)
