@@ -88,6 +88,18 @@ def update_user(username):
         "data" : user_updated_data
     })
 
+@app.route('/user/<username>',methods=['DELETE'])
+def delete_user(username):
+    find_username = collection.find_one({'username' : username})
+    if not find_username:
+        return jsonify({
+                'message' : "Username doesnot match",
+        }),404
+    collection.delete_one({'username' : username})
+    return jsonify({
+        "message" : f"{username} ---> username is deleted"
+    })
+
 
 if __name__ == '__main__':
     app.run(debug= True)
