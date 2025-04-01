@@ -24,7 +24,22 @@ def home():
 
 @app.route("/submit-login", methods=["POST"])
 def submit_login():
-    return "agsa"
+    data = request.form
+    password = data.get("password","")
+    username = data.get("username","")
+
+    find_username = collection.find_one({'username' : username})
+    if not find_username:
+        return jsonify({
+                'message' : "Username doesnot match",
+        }),404
+    
+    if password != find_username['password']:
+        return jsonify({
+            'message' : 'Wrong Password'
+        }),404
+     
+    return redirect(url_for('home'))
 
 @app.route("/submit-signup", methods=["POST"])
 def submit_sign_up():
