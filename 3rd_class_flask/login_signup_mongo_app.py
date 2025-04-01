@@ -57,5 +57,17 @@ def submit_sign_up():
     
     return redirect(url_for("login"))
 
+@app.route('/all/users', methods =['GET'])
+def get_all_users():
+    users = list(collection.find({},{'_id':0}))
+    if not users:
+        return jsonify({
+            'message' : 'Users are not available'
+        }),401
+    return jsonify({
+        'message' : 'All Uesrs are here',
+        'data': users
+    })
+
 if __name__ == '__main__':
     app.run(debug= True)
