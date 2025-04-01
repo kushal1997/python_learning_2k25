@@ -51,7 +51,7 @@ def submit_sign_up():
     if not password or not username:
         return jsonify({
             "message" : "password & username is mandatory"
-        }),401
+        }),404
     user_data = {key: value for key, value in data.items()}
     collection.insert_one(user_data)
     
@@ -63,11 +63,31 @@ def get_all_users():
     if not users:
         return jsonify({
             'message' : 'Users are not available'
-        }),401
+        }),404
     return jsonify({
         'message' : 'All Uesrs are here',
         'data': users
     })
+
+@app.route('/user/<username>', methods=['PUT'])
+def update_user(username):
+    find_username = collection.find_one({'username' : username})
+    if not find_username:
+        return jsonify({
+                'message' : "Username doesnot match",
+        }),404
+    
+    data = request.form
+    user_data = {key: value for key, value in data.items()}
+    collection.update_one({'username' : username }, {'$set' : user_data})
+
+    user_updated_data = list(collection.find({'username' : data['username']},{'_id': 0}))
+    print("user_updated_data ==============> ",user_updated_data)
+    return jsonify({
+        "message" : "Data is updated",
+        "data" : user_updated_data
+    })
+
 
 if __name__ == '__main__':
     app.run(debug= True)
