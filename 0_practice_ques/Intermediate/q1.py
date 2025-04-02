@@ -25,6 +25,13 @@ def second_largest_num(arr):
 
     return print("second largest number is : ",second_max_num)
 
+def short_hand_method(arr):
+    arr.sort()
+    length = len(arr)
+    return print("second largest number is : ",arr[length -2 ])
+
 arr = [1,4,1,2,6,3]
 
 second_largest_num(arr)
+
+short_hand_method(arr)
