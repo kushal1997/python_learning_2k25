@@ -10,6 +10,22 @@ data = {
 
 print(data)
 
+# can be re-assigned to other
+p_data ={}
+p_data = data
+
+print("p data ------------>:",p_data)
+
+# can be compared with == operator
+dict1 = {'a': 1, 'b': 2, 'c': 3}
+dict2 = {'a': 1, 'b': 2, 'c': 3}
+
+if dict1 == dict2:
+    print("both are equal")
+else:
+    print("not equal")
+
+
 # Access Elements through KEY value
 print(data['age'])
 
