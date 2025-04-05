@@ -76,9 +76,14 @@ def add_task():
         "message" : "task added succesfully",
     })
 
-@app.route("/task/<id>", methods = ['PUT'])
-def update_task(id):
+@app.route("/task", methods = ['PUT'])
+def update_task():
     data = request.json
+    id = data.get('id')
+
+    if not id:
+        return jsonify({"message": "Task ID is required"}), 400
+    
     updated_data = data
     d = collection.find_one({'id' : id})
     if not d:
