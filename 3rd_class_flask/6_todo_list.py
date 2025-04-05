@@ -15,6 +15,7 @@ try:
     client = MongoClient("mongodb://localhost:27017/")
     db = client["todoList"]
     collection = db['tasks']
+    temp_collection = db['tempTime']
 except Exception as e:
     print(f"erros is -==========================> {e}")
 
@@ -47,6 +48,19 @@ def check_date_time(data):
 @app.route("/")
 def home():
     return "Home Page"
+
+@app.route("/tasks", methods = ["GET"])
+def get_all_tasks():
+    tasks = list(collection.find({},{'_id':0}))
+
+    if not tasks:
+        return jsonify({
+            "message" : "there is nothing in the databasse"
+        })
+    return jsonify({
+        "message" : "all tasks are here",
+        "all_tasks" : tasks
+    })
 
 @app.route("/task", methods = ["POST"])
 def add_task():
