@@ -7,6 +7,7 @@ from datetime import datetime
 import time
 import random
 import string
+import hashlib
 
 app = Flask(__name__)
 
@@ -17,10 +18,9 @@ try:
 except Exception as e:
     print(f"erros is -==========================> {e}")
 
-def generate_unique_id():
-    timestamp = str(int(time.time()))  # current time in seconds
-    random_str = ''.join(random.choices(string.ascii_letters + string.digits, k=4))  # 4-char random string
-    return timestamp + random_str
+def generate_secure_id():
+    raw = str(time.time()) + ''.join(random.choices(string.ascii_letters + string.digits, k=5))
+    return hashlib.sha256(raw.encode()).hexdigest()[:18]
 
 def check_date_time(data):
     
@@ -59,7 +59,7 @@ def add_task():
         }), 400
     
     updated_data = check_date_time(data)
-    updated_data['id'] = generate_unique_id()
+    updated_data['id'] = generate_secure_id()
     # all_tasks = list(collection.find({},{'_id':0}))
     d = collection.find_one({'task': data['task']})
     print(d)
