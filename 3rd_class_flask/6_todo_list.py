@@ -76,5 +76,22 @@ def add_task():
         "message" : "task added succesfully",
     })
 
+@app.route("/task/<id>", methods = ['PUT'])
+def update_task(id):
+    data = request.json
+    updated_data = data
+    d = collection.find_one({'id' : id})
+    if not d:
+        return jsonify({
+            'message' : 'id not found in data base'
+        }),404
+    if data.get('status', '') == '':
+        updated_data = check_date_time(data)
+
+    collection.update_one({'id': id},{'$set' : updated_data})
+    return jsonify({
+        "message" : "data updated successfully"
+    })
+
 if __name__ == '__main__':
     app.run(debug=True)
