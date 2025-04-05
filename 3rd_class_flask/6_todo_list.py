@@ -48,7 +48,7 @@ def check_date_time(data):
 @app.route("/")
 def home():
     return "Home Page"
-
+# get all tasks
 @app.route("/tasks", methods = ["GET"])
 def get_all_tasks():
     tasks = list(collection.find({},{'_id':0}))
@@ -62,6 +62,7 @@ def get_all_tasks():
         "all_tasks" : tasks
     })
 
+# add task
 @app.route("/task", methods = ["POST"])
 def add_task():
     data = request.json
@@ -90,6 +91,7 @@ def add_task():
         "message" : "task added succesfully",
     })
 
+# update task
 @app.route("/task", methods = ['PUT'])
 def update_task():
     data = request.json
