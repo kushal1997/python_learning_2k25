@@ -129,5 +129,19 @@ def update_task():
         "message" : "data updated successfully"
     })
 
+# delete task
+@app.route("/task/<id>", methods = ['DELETE'])
+def delete_task(id):
+    d = collection.find_one({'id':id})
+    # print("d================",d)
+    if not d:
+        return jsonify({
+            "message" : "ID not found"
+        }),404
+    collection.find_one_and_delete({'id': id})
+    return jsonify({
+        "message" : "Task is deleted"
+    })
+
 if __name__ == '__main__':
     app.run(debug=True)
