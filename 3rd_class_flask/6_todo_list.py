@@ -52,10 +52,21 @@ def check_date_time(data):
 def home():
     return "Home Page"
 
-# get all tasks
-@app.route("/tasks", methods = ["GET"])
-def get_all_tasks():
-    tasks = list(collection.find({},{'_id':0}))
+# get any tasks wrt status
+@app.route("/<status>/tasks", methods = ["GET"])
+def get_all_tasks(status):
+    print("status   ================>",status)
+    tasks = []
+    valid_statuses = ['due', 'pending', 'completed','all']
+
+    if status not in valid_statuses:
+        return jsonify({
+            "message": "Invalid status. Must be one of: due, pending, completed."
+        }), 400
+    if status == 'all':
+        tasks = list(collection.find({},{'_id':0}))
+    else:
+        tasks = list(collection.find({'status': status},{'_id':0}))
 
     if not tasks:
         return jsonify({
