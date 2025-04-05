@@ -19,10 +19,12 @@ try:
 except Exception as e:
     print(f"erros is -==========================> {e}")
 
+#generate hash id with current time and random string
 def generate_secure_id():
     raw = str(time.time()) + ''.join(random.choices(string.ascii_letters + string.digits, k=5))
     return hashlib.sha256(raw.encode()).hexdigest()[:18]
 
+# compare date & time of current & response to set status
 def check_date_time(data):
     
     task_date = datetime.strptime(data['date'], '%d/%m/%Y').date()
@@ -45,9 +47,11 @@ def check_date_time(data):
     
     return data
 
+# home page
 @app.route("/")
 def home():
     return "Home Page"
+
 # get all tasks
 @app.route("/tasks", methods = ["GET"])
 def get_all_tasks():
