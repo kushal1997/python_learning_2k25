@@ -25,7 +25,6 @@ if dict1 == dict2:
 else:
     print("not equal")
 
-
 # Access Elements through KEY value
 print(data['age'])
 
